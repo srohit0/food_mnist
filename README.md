@@ -31,6 +31,9 @@ food-MNIST/
         train.txt
 ```
 
+## Reference
+Food-101 – Mining Discriminative Components with Random Forests](https://www.vision.ee.ethz.ch/datasets_extra/food-101/static/bossard_eccv14_food-101.pdf)
+
 ### Disclaimer
 This dataset has been created from Food-101 dataset for quick training and educational purposes.
 
