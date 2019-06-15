@@ -30,6 +30,41 @@ food-MNIST/
         train.json
         train.txt
 ```
+## APIs
+
+### API 1: load_data(width, height)
+
+ **Returns:**  
+It returns two tuples
+1. x_train, x_test: uint8 array of RGB image data with shape (num_samples, width, height, 3) from the image_data_format backend setting o either channels_first or channels_last respectively.
+2. y_train, y_test: uint8 array of category labels (integers in range 0-9) with shape (num_samples,).
+
+### API 2: labels()
+**Returns:** dictionary of labels
+
+---
+
+**Example**
+
+      (x_train, y_train), (x_test, y_test) = food_mnist.load_data()
+      labels_dict = food_mnist.labels()
+
+## Usage
+
+### Download for custome usage
+```
+git clone https://github.com/srohit0/food_mnist.git
+import mnist_food
+...
+...
+(x_train, y_train), (x_test, y_test) = food_mnist.load_data()
+labels_dict = food_mnist.labels()
+```
+
+### Working with Colab 
+
+Here is an [example of using food_mnist in google colab notebook](https://colab.research.google.com/drive/1Pad2yvBw21MVbyPLmKMPQbGMucAFg8YQ)
+
 
 ## Reference
 Original paper on [Food-101 – Mining Discriminative Components with Random Forests](https://www.vision.ee.ethz.ch/datasets_extra/food-101/static/bossard_eccv14_food-101.pdf)
