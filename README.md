@@ -32,11 +32,10 @@ food-MNIST/
 ```
 
 ## Reference
-Food-101 – Mining Discriminative Components with Random Forests](https://www.vision.ee.ethz.ch/datasets_extra/food-101/static/bossard_eccv14_food-101.pdf)
+Original paper on [Food-101 – Mining Discriminative Components with Random Forests](https://www.vision.ee.ethz.ch/datasets_extra/food-101/static/bossard_eccv14_food-101.pdf)
 
 ### Disclaimer
-This dataset has been created from Food-101 dataset for quick training and educational purposes.
+This dataset was created out of necessity to train food-samples on smaller machine with under 8GB RAM. Source of this dataset is [Food-101 dataset](http://data.vision.ee.ethz.ch/cvl/food-101.tar.gz)
 
 **Credit:**
-All images can be found in the "images" folder and are organized per class. All image ids are unique and correspond to the foodspotting.com review ids. Thus the original articles can retrieved trough http://www.foodspotting.com/reviews/<image_id> or through the foodspotting api (http://www.foodspotting.com/api). The test/train splitting used in the experiment of our paper, can be found in the "meta" directory.
-For any questions on the original Food-101 dataset contact bossard@vision.ee.ethz.ch
+All images can be found in the "images" folder and are organized per class. All image ids are unique and correspond to the foodspotting.com review ids. Thus the original articles can retrieved trough http://www.foodspotting.com/reviews/<image_id> or through the foodspotting api (http://www.foodspotting.com/api). The test/train splitting used in the experiment of our paper, can be found in the "meta" directory. For any questions on the original Food-101 dataset contact bossard@vision.ee.ethz.ch
