@@ -15,7 +15,12 @@ Original file is located at
 import os, sys
 import cv2
 import numpy as np
-from google.colab.patches import cv2_imshow
+try:
+    from google.colab.patches import cv2_imshow
+except Exception as e:
+    print "module google.colab.patches not imported."
+    def cv2_imshow(image):
+        cv2.imshow('food MNIST', image)
 
 """## labels()
 
@@ -26,10 +31,10 @@ from google.colab.patches import cv2_imshow
 
 def labels():
   lbls = {}
-  with open(os.path.join("food_mnist", "meta", "classes.txt")) as f: 
+  with open(os.path.join("food_mnist", "meta", "classes.txt")) as f:
     imgTags = [x.strip() for x in f.readlines()]
     lbls = {key: value for (key, value) in enumerate(imgTags)}
-    
+
     return lbls
 
 """## iLabel(lblName, lblDict)
@@ -41,7 +46,7 @@ def labels():
       lblName: string
       lblDict: dictionary of int:string values
 
-**Returns:** 
+**Returns:**
 
       integer enum corresponding to string label
 """
@@ -50,12 +55,12 @@ def iLabel(lblName, lblDict=None):
   if lblDict is None:
     lblDict = labels()
 
-    for num in lblDict.keys():
-      if lblDict[num] == lblName.lower():
-        return num;
-    
-    return -1
-  
+  for num in lblDict.keys():
+    if lblDict[num] == lblName.lower():
+      return num;
+
+  return -1
+
 #iLabel("bibimbap")
 
 """## transform_image(imgFileName, imgHeight, imgWidth)
@@ -68,20 +73,20 @@ def iLabel(lblName, lblDict=None):
       imgHeight: integer, height of the images between as per ML model
       imgWidth : integer, width of the images between as per ML model
 
-**Returns:** 
+**Returns:**
 
       numpy array of the image with shape(imgHeight, imgWidth, 3)
-      
+
  **Description**
- 
+
 This function transforms the original image to a new dimension keeping the maximum imformation in the returned image.
 1. change (portrait/landscape) orientation of imageFile if necessary
-2. find crop size scale, and crop image 
+2. find crop size scale, and crop image
 3. resize to width and height
 """
 
 def transform_image(imgFileName, height, width, show=False):
-  
+
   image = cv2.imread(imgFileName)
   imageH, imageW, _ = image.shape
   if show:
@@ -106,14 +111,14 @@ def transform_image(imgFileName, height, width, show=False):
   newHeight = int(height*scale)
   if ( abs(scale-1.0) > sys.float_info.epsilon ):
     image = image[
-              int((imageH-newHeight)/2):int((imageH+newHeight)/2), 
+              int((imageH-newHeight)/2):int((imageH+newHeight)/2),
               int((imageW-newWidth)/2):int((imageW+newWidth)/2)
             ]
     imageH, imageW, _ = image.shape
     if show:
       print(image.shape)
       cv2_imshow(image)
-  
+
   # Step 3: resize to width and height
   if (image.shape[0] != height or image.shape[1] != width):
     image = cv2.resize(image,(width,height),interpolation=cv2.INTER_AREA)
@@ -121,7 +126,7 @@ def transform_image(imgFileName, height, width, show=False):
     if show:
       print(image.shape)
       cv2_imshow(image)
-  
+
   return image;
 
 #print(transform_image("food_mnist/images/apple_pie/134.jpg", 384, 512, True).shape)
@@ -136,7 +141,7 @@ def transform_image(imgFileName, height, width, show=False):
       imgWidth : integer, width of the images between as per ML model
       imgHeight: integer, height of the images between as per ML model
 
-**Returns:** 
+**Returns:**
 
       numpy array of the image with shape(numImages, imgHeight, imgWidth, 3)
       list of integers representing labels
@@ -144,19 +149,19 @@ def transform_image(imgFileName, height, width, show=False):
 
 def load_images(tagFile, imgHeight, imgWidth):
   lbls = labels();
-  
+
   all_images = []
   all_labels = []
-  with open(tagFile) as f: 
+  with open(tagFile) as f:
     tagSet = [x.strip() for x in f.readlines()]
 
   for tag in tagSet:
     lbl, imgTag = os.path.split(tag)
     iLbl        = iLabel(lbl, lbls)
-    
+
     imgFile     = os.path.join("food_mnist", "images", lbl, imgTag+".jpg" )
     img         = transform_image(imgFile, imgHeight, imgWidth)
-    
+
     all_images.append(img)
     all_labels.append(iLbl)
 
@@ -164,8 +169,8 @@ def load_images(tagFile, imgHeight, imgWidth):
 
 """##  load_data(width, height)
 
- **Returns:** 
- 
+ **Returns:**
+
  It returns two tuples
 1. x_train, x_test: uint8 array of RGB image data with shape (num_samples, width, height, 3) from the image_data_format backend setting o either channels_first or channels_last respectively.
 2. y_train, y_test: uint8 array of category labels (integers in range 0-9) with shape (num_samples,).
@@ -177,12 +182,12 @@ def load_images(tagFile, imgHeight, imgWidth):
 """
 
 def load_data(imgWidth=224, imgHeight=224):
-  
+
   (x_train, y_train) = load_images(os.path.join("food_mnist", "meta", "train.txt"), imgWidth, imgHeight)
   (x_test, y_test)   = load_images(os.path.join("food_mnist", "meta", "test.txt"), imgWidth, imgHeight)
-  
 
-    
+
+
   return (x_train, y_train), (x_test, y_test)
 
 """%%time
