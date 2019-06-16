@@ -11,7 +11,7 @@ Original file is located at
 ! git clone https://github.com/srohit0/food_mnist.git
 ! ls food_mnist
 """
-
+from __future__ import print_function
 import os, sys
 import cv2
 import numpy as np
