@@ -18,7 +18,7 @@ import numpy as np
 try:
     from google.colab.patches import cv2_imshow
 except Exception as e:
-    print "module google.colab.patches not imported."
+    print ("module google.colab.patches not imported.")
     def cv2_imshow(image):
         cv2.imshow('food MNIST', image)
 
