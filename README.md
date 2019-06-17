@@ -63,7 +63,8 @@ labels_dict = food_mnist.labels()
 
 ### Working with Colab 
 
-Here is an [example of using food_mnist in google colab notebook](https://colab.research.google.com/drive/1Pad2yvBw21MVbyPLmKMPQbGMucAFg8YQ)
+1. Here is a simple [example of using food_mnist in google colab notebook](https://colab.research.google.com/drive/1Pad2yvBw21MVbyPLmKMPQbGMucAFg8YQ)
+2. Here is a complete [example of training food-MNIST dataset on a simple network with over 75% training accuracy](https://colab.research.google.com/drive/1IMCmRKZuiEd5Gn4d16AY31hNnu_k__NG#scrollTo=a5mrxXuz8KHK)
 
 
 ## Reference
